@@ -1,0 +1,6 @@
+IFMATCHES(%CHAT%,"^\/login\s+(.+)$",&nwpw,1)
+    &srv = LCASE(%SERVER%)
+    REGEXREPLACE(&srv,"\W","_")
+    LOG([PWMG] Saved password %&nwpw% for %&srv%)
+    @&password_%&srv% = %&nwpw%
+ENDIF

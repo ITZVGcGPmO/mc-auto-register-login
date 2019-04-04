@@ -1,0 +1,39 @@
+DO;IFMATCHES(%SERVER%,"\w");BREAK;ENDIF;LOOP
+# wait until client has loaded
+FOREACH(%PLAYERS%)
+    IF(%PLAYERNAME% != %PLAYER%)
+        IFCONTAINS(%CHATCLEAN%,%PLAYERNAME%)
+            SET(playermsg)
+        ENDIF
+    ENDIF
+NEXT
+IF(!playermsg)
+    &srv = LCASE(%SERVER%)
+    REGEXREPLACE(&srv,"\W","_")
+    &glvr = @&password_%&srv%
+    &pw = %%&glvr%%
+    IF(%@canregister%)
+        IFMATCHES(%CHATCLEAN%,"\/register")
+            IF(!%@&password_%&srv%%)
+                RANDOM(#num, 100000, 999999)
+                ENCODE(%#num%,&pw)
+                &pw = LCASE(%&pw%)
+                @&password_%&srv% = %&pw%
+                LOG([PWMG] generated password %&pw% for %&srv%)
+            ENDIF
+            LOG("[PWMG] executing /register %&pw% for server %&srv%")
+            ECHO("/register %&pw%")
+            ECHO("/register %&pw% %&pw%")
+            UNSET(@canregister)
+        ENDIF
+    ENDIF
+    IF(%&pw%)
+        IFMATCHES(%CHATCLEAN%,"\/login")
+            LOG("[PWMG] executing /login %&pw% for server %&srv%")
+            ECHO("/login %&pw%")
+            UNSET(@canregister)
+        ENDIF
+    ENDIF
+ENDIF
+UNSET(playermsg)
+UNSET(&pw)
