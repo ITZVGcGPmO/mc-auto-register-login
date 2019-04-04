@@ -19,9 +19,10 @@ IF(!playermsg)
                 ENCODE(%#num%,&pw)
                 &pw = LCASE(%&pw%)
                 @&password_%&srv% = %&pw%
-                LOG([PWMG] generated password %&pw% for %&srv%)
+                # LOG([PWMG] generated password %&pw% for %&srv%)
             ENDIF
-            LOG("[PWMG] executing /register %&pw% for server %&srv%")
+            # LOG("[PWMG] executing /register %&pw% for server %&srv%")
+            POPUPMESSAGE(&a&l[PWMG] /register %&pw%)
             ECHO("/register %&pw%")
             ECHO("/register %&pw% %&pw%")
             UNSET(@canregister)
@@ -29,7 +30,8 @@ IF(!playermsg)
     ENDIF
     IF(%&pw%)
         IFMATCHES(%CHATCLEAN%,"\/login")
-            LOG("[PWMG] executing /login %&pw% for server %&srv%")
+            # LOG("[PWMG] executing /login %&pw% for server %&srv%")
+            POPUPMESSAGE(&a&l[PWMG] /login %&pw%)
             ECHO("/login %&pw%")
             UNSET(@canregister)
         ENDIF
