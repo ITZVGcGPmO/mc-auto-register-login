@@ -1,7 +1,7 @@
 IFMATCHES(%CHAT%,"^\/login\s+(.+)$",&nwpw,1)
     &srv = LCASE(%SERVER%)
     REGEXREPLACE(&srv,"\W","_")
-    # LOG([PWMG] Saved password %&nwpw% for %&srv%)
+    // LOG([PWMG] Saved password %&nwpw% for %&srv%)
     POPUPMESSAGE(&a&l[PWMG] Saved %&nwpw%)
     @&password_%&srv% = %&nwpw%
 ENDIF
