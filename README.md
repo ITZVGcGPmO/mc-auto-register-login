@@ -12,3 +12,6 @@ If you type `/login <password>`, your password will be overwritten! Please keep 
 If you are asked to /register, the script will register for you with a randumb password
 
 Passwords are stored, sent, and shown in plaintext!
+
+### Contributions
+Did you change something? Create a fork, upload your changes, and submit a pull request!
